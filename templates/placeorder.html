@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<!--cart content -->
+<div class="row mt-5">
+    <div class="col-md-9">
+        <div class="row">
+            <h5 class="bg-danger text-white p-2 " style="text-align: center;">Product Details</h5>
+            {% for x in products %}
+            <div class="col-md-4">
+                <img src="{{x.pid.pimage.url}}" width="100%" />
+            </div>
+            <div class="col-md-8">
+                <p><strong>Product Name:</strong> &nbsp;&nbsp;&nbsp;{{x.pid.name}}</p>
+                <p><strong>Price:</strong>&nbsp;&nbsp;&nbsp;Rs.{{x.pid.price}}</p>
+                {% if x.pid.cat == 1 %}
+                <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Mobile</p>
+                {% elif x.pid.cat == 2 %}
+                <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Shoes</p>
+                {% else %}
+                <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Clothes</p>
+                {% endif %}
+                <p><strong>Product description:</strong>&nbsp;&nbsp;&nbsp;{{x.pdetails}}</p>
+
+                <!--<p>
+                    <strong>QYT:</strong>
+                    <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+                    <input type="number" value="{{x.qty}}">
+                    <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+                </p>-->
+                <a href="/remove/{{x.id}}"><button class="btn btn-danger">Remove</button></a>&nbsp;&nbsp;&nbsp;
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h5 class="bg-danger text-white p-2" style="text-align: center;">Total Amount</h5>
+        <p><strong>Total {{n}} items:</strong>Rs.{{total}}</p>
+        <hr>
+        <p><strong>Total:</strong>Rs.{{total}}</p>
+        <a href="/makepayment"><button class="btn btn-danger">Make Payment</button></a>
+    </div>
+</div>
+
+<!--cart section ends-->
+
+{% endblock 'main' %}
